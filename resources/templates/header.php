@@ -11,6 +11,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- MINIATURA -->
+    <meta property="og:image" content="img/compartir/share.png" />
     <!-- CSS LOAD -->
     <link rel="stylesheet" href="../../public_html/css/style.css">
     <link id="css" rel="stylesheet" data-mode="day" href="../../public_html/css/bootstrap.min.css">

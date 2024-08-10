@@ -9,6 +9,10 @@ var ciudades=[];
         
         //CARGA LAS OPERACIONES
         function cargarOperaciones() {
+             //ocultar botton WA
+
+            //$('.botones_compartir').hide();
+
 
             const endpoint = 'https://servicios.ine.es/wstempus/js/ES/OPERACIONES_DISPONIBLES?geo=1';
             const request = new XMLHttpRequest();
@@ -156,18 +160,18 @@ var ciudades=[];
                                 //console.log(valores);
                                 for (let item of valores) {
                                     var newOption = document.createElement("option");
-                                    newOption.setAttribute("value", "tv=" + item.Fk_Variable + ":" + item.Id);
+                                    newOption.setAttribute("value", "tv=" + item.FK_Variable + ":" + item.Id);
                                     newOption.setAttribute("data-name", item.Nombre);
-                                    var value = "tv=" + item.Fk_Variable + ":" + item.Id
+                                    var value = "tv=" + item.FK_Variable + ":" + item.Id
                                     var newContent = document.createTextNode(item.Nombre);
                                     newOption.appendChild(newContent);
                                     select_variable.appendChild(newOption);
-                                    if(item.Fk_Variable==349||item.Fk_Variable==70||item.Fk_Variable==794||item.Fk_Variable==115){
+                                    if(item.FK_Variable==349||item.FK_Variable==70||item.FK_Variable==794||item.FK_Variable==115){
                                         //console.log('dentro del if');
                                         select_variable.setAttribute('multiple','multiple');
                                         select_variable.classList.add('provincia');
                                         select_variable.style.height = "100px";
-                                        if(item.Fk_Variable==794){
+                                        if(item.FK_Variable==794){
                                             select_variable.style.height = "unset";
                                         }
 
@@ -189,6 +193,10 @@ var ciudades=[];
 
             var id_operacion = $('#operaciones').val();
             var id_tabla = $('#tablas').val();
+
+            $.ajax({
+
+            })
 
             $.ajax({
                 "method": "POST",
@@ -333,6 +341,10 @@ var ciudades=[];
                                 pintarChart2(chartBusquedaPersonalizada.anyos, chartBusquedaPersonalizada.dataSeries, chartBusquedaPersonalizada.title,chartBusquedaPersonalizada.type);
                                 // pintarChart2(anyos, chartBusquedaPersonalizada.dataSeries, nombreTabla);
                                 // pintarChart(anyos, data, nombreTabla);
+
+                                $('.botones_compartir').show();
+                                
+                               
                             }
                         }
                         
@@ -382,6 +394,76 @@ var ciudades=[];
             $('.progress-bar').css('width',porcentaje);
         }
 
+        async function shareUrlImage() {
+            try {
+                // Selecciona el SVG desde el DOM usando la clase
+                const svgElement = document.querySelector('svg.highcharts-root');
+                if (!svgElement) {
+                    throw new Error('No se encontró el SVG con la clase "highcharts-root"');
+                }
+        
+                // Obtén el contenido SVG como texto
+                const svgText = new XMLSerializer().serializeToString(svgElement);
+        
+                // Configura la solicitud POST
+                const response = await fetch('../controllers/upload-image.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'test/plain' // O 'text/plain' si prefieres
+                    },
+                    body: svgText // Enviamos el SVG como raw data
+                });
+        
+                // Verifica si la solicitud fue exitosa
+                if (!response.ok) {
+                    throw new Error(`Error en la solicitud: ${response.statusText}`);
+                }
+        
+                // Obtén la respuesta del servidor
+                const result = await response.json();
+        
+                if (result.success) {
+                    console.log('Imagen subida exitosamente:', result.imageUrl);
+                    // Llama a la función con la nueva URL de la imagen
+                    updateMetaImage('../img/compartir/share.png'); 
+                } else {
+                    console.error('Error al subir la imagen:', result.error);
+                }
+            } catch (error) {
+                console.error('Error:', error.message);
+            }
+        }
+
+        function updateMetaImage(newImageUrl) {
+            // Selecciona la etiqueta <meta> con el atributo property="og:image"
+            const metaTag = document.querySelector('meta[property="og:image"]');
+        
+            // Verifica si la etiqueta <meta> fue encontrada
+            if (metaTag) {
+                // Actualiza el atributo content con la nueva URL de la imagen
+                metaTag.setAttribute('content', newImageUrl);
+                console.log('Etiqueta meta actualizada con la nueva URL de imagen:', newImageUrl);
+            } else {
+                console.error('Etiqueta meta con property="og:image" no encontrada.');
+            }
+            clickShareLink();
+        }
+
+        function clickShareLink() {
+            // Selecciona el enlace con el ID 'share-link'
+            const shareLink = document.getElementById('share-link');
+            
+            // Verifica si el enlace fue encontrado
+            if (shareLink) {
+                // Simula un clic en el enlace
+                shareLink.click();
+                console.log('Enlace compartido a WhatsApp.');
+            } else {
+                console.error('Enlace con ID "share-link" no encontrado.');
+            }
+        }
+        
+        
         
         
 

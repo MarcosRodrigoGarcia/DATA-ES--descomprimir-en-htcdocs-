@@ -8,7 +8,7 @@ include_once('../../resources/templates/header.php');
 <body onload="cargarOperaciones()">
 
 
-    <div class="container busqueda-personalizada">
+    <div class="container busqueda-personalizada" id="contenedor-gafico">
     <div class="titulo">
       <h2>Búsqueda personalizada</h2>
     </div>
@@ -34,11 +34,20 @@ include_once('../../resources/templates/header.php');
         <div class="progress">
         <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 0%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
-            <div class="botones">
-                <button class="btn btn-info" onclick="recogerValoresVariables()"><i class="fa-solid fa-chart-line"></i> Pintar gráfico</button>
-               
-            </div>
-            <div id="chart-container" style="width:100%"></div>
+        <div class="botones">
+            <button class="btn btn-info" onclick="recogerValoresVariables()"><i class="fa-solid fa-chart-line"></i> Pintar gráfico</button>
+            
+        </div>
+        <div id="chart-container" style="width:100%"></div>
+        <div class="botones_compartir">
+           
+
+           <button onclick="shareUrlImage()" id="btn-share" class="btn btn-outline-success mx-xl-2"><i class="fa fa-whatsapp" aria-hidden="true"></i> Compartir</button> 
+
+           <a id="share-link"href="https://api.whatsapp.com/send?text=https://marcosrodrigo.es/"  data-action="share/whatsapp/share" target="_blank"> 
+           </a>
+        </div>
+        
     </div>
     
 

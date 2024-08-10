@@ -3,7 +3,7 @@ session_start();
 include_once('../../resources/templates/header.php');
 ?>
 
-<div class="container busqueda-personalizada">
+<div class="container busqueda-personalizada" id="contenedor-gafico">
     <h1 id='titulografico' titulografico=<?php echo $_POST['tabla']; ?>> <?php echo $_POST['titulo']; ?></h1>
     <h2 id='subtitulografico'><?php echo $_POST['subtitulo']; ?></h2>
     <div class="row" id="contenedor_variables">
@@ -85,18 +85,18 @@ include_once('../../resources/templates/header.php');
                         //console.log(valores);
                         for (let item of valores) {
                             var newOption = document.createElement("option");
-                            newOption.setAttribute("value", "tv=" + item.Fk_Variable + ":" + item.Id);
+                            newOption.setAttribute("value", "tv=" + item.FK_Variable + ":" + item.Id);
                             newOption.setAttribute("data-name", item.Nombre);
-                            var value = "tv=" + item.Fk_Variable + ":" + item.Id
+                            var value = "tv=" + item.FK_Variable + ":" + item.Id
                             var newContent = document.createTextNode(item.Nombre);
                             newOption.appendChild(newContent);
                             select_variable.appendChild(newOption);
-                            if (item.Fk_Variable == 349 || item.Fk_Variable == 70 || item.Fk_Variable == 794 || item.Fk_Variable == 115) {
+                            if (item.FK_Variable == 349 || item.FK_Variable == 70 || item.FK_Variable == 794 || item.FK_Variable == 115) {
                                 //console.log('dentro del if');
                                 select_variable.setAttribute('multiple', 'multiple');
                                 select_variable.classList.add('provincia');
                                 select_variable.style.height = "100px";
-                                if (item.Fk_Variable == 794) {
+                                if (item.FK_Variable == 794) {
                                     select_variable.style.height = "unset";
                                 }
 
