@@ -35,11 +35,11 @@ include_once('../../resources/templates/header.php');
         <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 0%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
         <div class="botones">
-            <button class="btn btn-info" onclick="recogerValoresVariables()"><i class="fa-solid fa-chart-line"></i> Pintar gráfico</button>
+            <button class="btn btn-info" onclick="recogerValoresVariables()" disabled><i class="fa-solid fa-chart-line"></i> Mostrar gráfico</button>
             
         </div>
         <div id="chart-container" style="width:100%"></div>
-        <div class="botones_compartir">
+        <div class="botones_compartir" style="display: none;">
            
 
            <button onclick="shareUrlImage()" id="btn-share" class="btn btn-outline-success mx-xl-2"><i class="fa fa-whatsapp" aria-hidden="true"></i> Compartir</button> 

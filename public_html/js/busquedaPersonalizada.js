@@ -11,7 +11,7 @@ var ciudades=[];
         function cargarOperaciones() {
              //ocultar botton WA
 
-            //$('.botones_compartir').hide();
+            $('.botones_compartir').hide();
 
 
             const endpoint = 'https://servicios.ine.es/wstempus/js/ES/OPERACIONES_DISPONIBLES?geo=1';
@@ -44,6 +44,10 @@ var ciudades=[];
         }
         //CARGA LAS TABLAS ASOCIADAS A LA OPERACIÓN
         function tablasOperacion() {
+
+            /* deshabilita el botón de Mostrar Gráfico */
+            $('button:contains("Mostrar gráfico")').prop('disabled', true);  
+
             $('#contenedor_variables').fadeOut();
             //Borramos el Select de tablas
             removeselect();
@@ -229,7 +233,7 @@ var ciudades=[];
         });
 
 
-            
+        $('button:contains("Mostrar gráfico")').prop('disabled', false);   
             
             
             
@@ -252,11 +256,7 @@ var ciudades=[];
                  ciudades.push(ciudad);
                 }
             });
-            
-            //console.log("CIUDADES");
-            //console.log(ciudades);
-           
-            
+                
 
             valoresVariables = valoresVariables.substring(0, valoresVariables.length - 1);
             valoresVariables = valoresVariables.replaceAll(",","&");
@@ -265,6 +265,8 @@ var ciudades=[];
             //console.log("consulta");
             //console.log(valoresVariables);
             mostrarSeries(valoresVariables);
+
+
         }
 
         //BUSCA SERIES y LLAMA A PINTAR GRAFICO

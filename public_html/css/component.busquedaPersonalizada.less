@@ -1,52 +1,66 @@
 //out: false
-.busqueda-personalizada{
+.busqueda-personalizada {
     min-height: 70vh;
-    div.tabla{
+
+    div.tabla {
         display: none;
     }
-    select{
+
+    select {
         width: 100%;
         height: 45px;
         word-wrap: normal;
         font-size: 16px;
         border-radius: 10px;
     }
-    .botones{
+
+    .botones {
         text-align: center;
         margin: 20px;
     }
-    .progress{
+
+    .progress {
         margin: 20px 15%;
     }
-    .chart-container{
+
+    .chart-container {
         @media screen and (min-width: 1023px) {
-            
+
             height: 600px;
-            
+
         }
 
         @media screen and (max-width: 700) {
-            
-                height: 600px;
-            }
-    }  
+
+            height: 600px;
+        }
+    }
+
+    
+    /* Botones compartir */
+    .botones_compartir {
+        margin: 25px;
+        text-align: center;
+    }
 }
 
 
 
 // mapa
 
- .pintarMapaMovil{
-     width: 100%;
-     @media screen and (min-width: 768) {
-            display: none !important;
-        
+.pintarMapaMovil {
+    width: 100%;
+
+    @media screen and (min-width: 768) {
+        display: none !important;
+
     }
 
- }
- .pintarMapaEscritorio{
+}
+
+.pintarMapaEscritorio {
     @media screen and (max-width: 767) {
         display: none !important;
-    
+
     }
- }
+}

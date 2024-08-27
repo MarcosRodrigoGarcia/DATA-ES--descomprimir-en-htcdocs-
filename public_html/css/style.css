@@ -159,6 +159,10 @@ div.administrador #botones-administrador {
     height: 600px;
   }
 }
+.busqueda-personalizada .botones_compartir {
+  margin: 25px;
+  text-align: center;
+}
 .pintarMapaMovil {
   width: 100%;
 }
