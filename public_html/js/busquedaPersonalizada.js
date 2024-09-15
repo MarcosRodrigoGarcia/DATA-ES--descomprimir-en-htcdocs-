@@ -320,12 +320,6 @@ var ciudades=[];
                                     periodos.push(serie.FK_Periodo);
                                     
                                 }
-                                // conjuntoData.push(data);
-                                // //console.log(conjuntoData);
-                                
-                                console.log ("i");
-                                console.log ("--------------------------");
-                                console.log (i);
                                 
                                 var dataserie= {name: ciudades[i],data: data};
                                 dataseries.push(dataserie);
@@ -397,6 +391,10 @@ var ciudades=[];
         }
 
         async function shareUrlImage() {
+
+            const dataChartLink = await construirDataChartLink();
+            console.log(dataChartLink);   
+
             try {
                 // Selecciona el SVG desde el DOM usando la clase
                 const svgElement = document.querySelector('svg.highcharts-root');
@@ -464,6 +462,56 @@ var ciudades=[];
                 console.error('Enlace con ID "share-link" no encontrado.');
             }
         }
+
+        // Función para construir el objeto con la operación, tabla y variables seleccionadas
+        async function construirDataChartLink() {
+            // Obtener el select de operaciones y tabla
+            const operacionSelect = document.getElementById("operaciones");
+            const tablaSelect = document.getElementById("tablas");
+
+            // Obtener los valores y nombres seleccionados de la operación
+            const operacion = {
+            nombre: operacionSelect.options[operacionSelect.selectedIndex].text,
+            valor: operacionSelect.value
+            };
+
+            // Obtener los valores y nombres seleccionados de la tabla
+            const tabla = {
+            nombre: tablaSelect.options[tablaSelect.selectedIndex].text,
+            valor: tablaSelect.value
+            };
+
+            // Obtener todas las variables seleccionadas (con múltiples select)
+            const variables = [];
+            const variableTables = document.querySelectorAll('#contenedor_variables .variable_tabla');
+
+            variableTables.forEach((table) => {
+                const nombreVariable = table.querySelector('h3').textContent;  // Obtener el nombre del <h3>
+                const idVariable = table.id;  // Obtener el id del contenedor .variable_tabla
+                
+                const select = table.querySelector('select');
+                
+                const seleccionados = Array.from(select.selectedOptions).map((option) => ({
+                nombre: option.getAttribute('data-name'),
+                valor: option.value
+            }));
+
+            // Añadir cada variable al array con su nombre y valores seleccionados
+            variables.push({
+            id: idVariable,  // Aquí está el ID del contenedor
+            nombre: nombreVariable,  // Aquí está el texto del <h3>
+            valoresSeleccionados: seleccionados
+            });
+        });
+
+            // Devolver el objeto con operación, tabla y variables
+            return {
+            operacion,
+            tabla,
+            variables
+            }; 
+
+    }
         
         
         

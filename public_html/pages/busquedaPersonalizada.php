@@ -40,10 +40,7 @@ include_once('../../resources/templates/header.php');
         </div>
         <div id="chart-container" style="width:100%"></div>
         <div class="botones_compartir" style="display: none;">
-           
-
            <button onclick="shareUrlImage()" id="btn-share" class="btn btn-outline-success mx-xl-2"><i class="fa fa-whatsapp" aria-hidden="true"></i> Compartir</button> 
-
            <a id="share-link"href="https://api.whatsapp.com/send?text=https://marcosrodrigo.es/"  data-action="share/whatsapp/share" target="_blank"> 
            </a>
         </div>
