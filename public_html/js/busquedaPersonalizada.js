@@ -393,7 +393,9 @@ var ciudades=[];
         async function shareUrlImage() {
 
             const dataChartLink = await construirDataChartLink();
-            console.log(dataChartLink);   
+            
+            // Llamar a la función para encriptar y actualizar el enlace de WhatsApp
+            encriptarDataChartLink(dataChartLink);
 
             try {
                 // Selecciona el SVG desde el DOM usando la clase
@@ -511,6 +513,38 @@ var ciudades=[];
             variables
             }; 
 
+    }
+
+    // Función para convertir array de bytes a Base64
+    function arrayBufferToBase64(buffer) {
+        var binary = '';
+        var bytes = new Uint8Array(buffer);
+        var len = bytes.byteLength;
+        for (var i = 0; i < len; i++) {
+        binary += String.fromCharCode(bytes[i]);
+        }
+        return window.btoa(binary);
+    }
+
+    //función para encriptar y actualizar el enlace de WhatsApp
+    function encriptarDataChartLink(dataChartLink) {
+        // Convertir el objeto en una cadena JSON
+        const jsonString = JSON.stringify(dataChartLink);
+
+        // Comprimir los datos usando deflate
+        const compressedData = pako.deflate(jsonString);
+
+        // Convertir los datos comprimidos a Base64
+        const base64Data = arrayBufferToBase64(compressedData);
+
+        // Construir la URL con los datos comprimidos en Base64
+        const baseUrl = "https://marcosrodrigo.es/share/";
+        const fullUrl = baseUrl + base64Data;
+
+        // Actualizar el enlace de WhatsApp
+        const shareLink = document.getElementById("share-link");
+        shareLink.href = "https://api.whatsapp.com/send?text=" + encodeURIComponent(fullUrl);
+        console.log(fullUrl);
     }
         
         
