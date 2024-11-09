@@ -7,10 +7,13 @@ var ciudades=[];
 
         
         
-        //CARGA LAS OPERACIONES
-        function cargarOperaciones() {
-             //ocultar botton WA
+        //CARGA LAS OPERACIONES (pasar el json si es nulo que el comportamiento sea 
+/*         igual)*/
+        function cargarOperaciones(operacionData) {
 
+            if (operacionData==="null") {
+
+            
             $('.botones_compartir').hide();
 
 
@@ -42,6 +45,7 @@ var ciudades=[];
                 }
             }
         }
+    }
         //CARGA LAS TABLAS ASOCIADAS A LA OPERACIÓN
         function tablasOperacion() {
 
@@ -538,7 +542,7 @@ var ciudades=[];
         const base64Data = arrayBufferToBase64(compressedData);
 
         // Construir la URL con los datos comprimidos en Base64
-        const baseUrl = "https://marcosrodrigo.es/share/";
+        const baseUrl = "https://marcosrodrigo.es/public_html/controllers/controllerShareLink.php/share/";
         const fullUrl = baseUrl + base64Data;
 
         // Actualizar el enlace de WhatsApp
